@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139993877-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-139993877-1');
+    </script>
+
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      function handleDownloadClicks(event) {
+        ga('download file', 'event', {
+                     eventCategory: 'files',
+                     eventAction: 'downloaded',
+                     eventLabel: 'click download'
+                   })
+        ;
+	alert('hi');
+      }
+      ga('create', 'UA-139993877-1', 'auto');
+      ga('send', 'pageview');
+      ga('send', 'event');
+    </script>
+
+        <meta charset="UTF-8">
+            <title>MLator</title>
+            <link rel="shortcut icon" href="{{url_for('static',filename='favicon.jpg')}}">
+            {% include 'commonResources.html' %}
+                <script type="text/css"  src="{{ url_for('static', filename='css/dropzone.css') }}"></script>
+                <script type="text/javascript"  src="{{ url_for('static', filename='js/jquery.min.1.7.js') }}"></script>
+
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                        <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+                            <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+                                <script type="text/javascript"  src="{{ url_for('static', filename='js/jquery.min.1.7.js') }}"></script>
+<!--                                <script type="text/javascript"  src="{{ url_for('static', filename='js/dropzone.js') }}"></script>-->
+
+                                {{ dropzone.load_css() }}
+    {{ dropzone.style('border: 2px dashed #000;height:100%;background:#0002;min-height:0px') }}
+                                </head>
+    <body   class="vbox viewport">
+        <nav id='navbar' class="navbar navbar-expand-sm ">
+            <a id='brand' class="navbar-brand brand text-white" href='/'>{{ current_user.get_user_name()|upper }}</a>
+            
+            
+            <div class="navbar-nav ml-auto">
+                
+                <ul class="navbar-nav mr-auto">
+                   
+                    <li class="nav-item">
+                        
+                        <span class="nav-link"  href="#carouselExampleControls" role="button" data-slide="next" data-spy="affix" data-offset-top="501" data-offset-bottom="">
+                            <button type="button" id="sidebarCollapse" class="navbar-btn sticky  active" style="display: table-cell;">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </span></li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+        <section class="wrapper main hbox space-between">
+            
+            <nav id="sidebar" class="navbar navbar-dark  flex-md-nowrap shadow">
+                <!-- Sidebar Header -->
+                <ul class="navbar-nav mr-auto">
+                   
+                    <li class="nav-item">
+                        <a class="font-weight-bold btn nav-link" href="#">
+                            
+                            New Translation
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn" href="#">
+                        My Projects
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn" href="#">
+                        <a class="nav-link" href="{{ url_for('account') }}">
+                           
+                            My Account
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn" href="/logout">
+                            
+                            Log Out
+                        </a>
+                    </li>
+                    
+                </ul>
+                <!-- Sidebar Links -->
+         
+            </nav>
+            
+
+    <div class="card light-yellow" style='width:100%;height:100vh;'>
+  
+                <div class="card-body">
+                    {{ dropzone.create('upload') }}
+                    {{ dropzone.load_js() }}
+                    {{ dropzone.config(auto_discover=false,custom_init='this.on("success", function(file, response) {$("#uploadBtn").removeAttr("disabled");; });this.on("drop", function(file, response) {$("#uploadBtn"). attr("disabled", ""); });',
+                    custom_options=' addRemoveLinks: true') }}
+                </div>
+                <div class='card-footer'>
+                   <center><a href='{{ url_for('download')}}'>   <button style=' margin: 0 auto;' onClick="handleDownloadClicks()" id="uploadBtn" disabled>Download</button></a></center>
+                </div>
+            </div>
+
+                </section>
+
+
+        
+        <input type="file" multiple="multiple" class="dz-hidden-input" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">
+        
+        <script>
+
+            
+            
+        $(document).ready(function () {
+                          var obj = $("#dragandrophandler")
+                          
+                          
+                          window.onload = function() {scroller();};
+                          
+                          window.onready =       function() { $("#dragandrophandler")};
+                          
+                          window.onscroll = function() {scroller()};
+                          
+                          document.getElementById("navbar").style.padding = "10px 10px";
+                          
+                          
+                          
+                          $('#sidebarCollapse').on('click', function () {
+                                                   $('#buttone0').toggleClass('active');
+                                                   
+                                                   $('#sidebar').toggleClass('active');
+                                                   $('#sidebar').paddingTop= $('#navbar').height();
+                                                   $(this).toggleClass('active');
+                                                   });
+                          function scroller() {
+                          if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+                          document.getElementById("navbar").style.padding = "0px 0px";
+                          document.getElementById("sidebar").style.padding = "35px";
+                          var link_list = document.querySelectorAll("#navbar a ");
+                          var index = 0, length = link_list.length;
+                          for ( ; index < length; index++) {
+                          link_list[index].style.fontSize = "25px";
+                          }
+                          document.getElementById("brand").style.fontSize = "25px";
+                          } else {
+                          document.getElementById("sidebar").style.padding = "45px";
+                          
+                          document.getElementById("navbar").style.padding = "10px 10px";
+                          var link_list = document.querySelectorAll("#navbar a ");
+                          var index = 0, length = link_list.length;
+                          for ( ; index < length; index++) {
+                          link_list[index].style.fontSize = "35px";
+                          }
+                          document.getElementById("brand").style.fontSize = "35px";
+                          }
+                          }
+                          
+                          
+                          
+                          
+                          
+                          
+                          });
+                          window.onload = function() {
+
+                  
+                                              
+                                           
+                          };
+            var csrf_token = "{{ csrf_token() }}";
+            
+            $.ajaxSetup({
+                        beforeSend: function(xhr, settings) {
+                        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                        }
+                        }
+                        });
+    
+    
+            </script>
+<style>.progress{height:100%}
+.drobbox{margin:0}
+.dz-default{padding-top:25%}</style>
+    </body>
+</html>
+

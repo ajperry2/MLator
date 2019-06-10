@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139993877-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-139993877-1');
+    </script>
+	    
+	    <meta charset="UTF-8">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+            <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <title>MLator | About</title>
+                </head>
+<body>
+
+<!--     Navbar for homepage, responds to whether user is logged in   -->
+        <nav id='navbar' class="navbar navbar-expand-sm navbar-dark sticky-top">
+            <a id='brand' class="navbar-brand brand text-white" href="/">MLator</a>
+            <div class="navbar-nav ml-auto">
+                <ul id="main-list" class="navbar-nav mr-auto">
+                        {% if (current_user.is_authenticated) %}
+                        <li class="nav-item">
+                            <a class=" font-weight-bold nav-link" href='/user/{{current_user.get_user_name()}}'>
+                                User Dashboard
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link btn font-weight-bold" data-toggle="modal" data-target="#registerModal">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn font-weight-bold"
+                                id = "newlogin"
+                                data-toggle="modal"
+                                data-target="#logInModal">
+                                Log In
+                            </a>
+                        </li>
+                        {% endif %}
+                </ul>
+            </div>
+
+        </nav>
+
+<div class="row d-flex justify-content-center margin-top">
+    <div class="col-8 pt-5">
+    <h2>Mission</h2>
+    Our goal is to provide fast, high quality translations of Japanese
+    comic books to allow English-speaking fans to appreciate them.
+<br><br>
+    <h2>How it Works</h2>
+    Our AI-powered software makes it easy to get the translations you need.
+    On our <span class="caps">upload</span> page, you can upload a pdf,
+    image, or folder of images. Wait a few seconds and a download link will
+    appear. Now you're ready to enjoy your translated comics!
+
+    <br><br>
+    <h2>Behind the Scenes</h2>
+    For a more in-depth look into what goes on behind the scenes, read on.
+    We'll take you through the five step process we use to provide you
+    with the comics you love.
+
+    <div class="about-wrapper"><h3>1. Bubble Detection</h3>
+    <img src="{{ url_for('static', filename='images/bubble.png') }}" class="about-img" height=200>
+    After you upload a comic, our first task is to detect the locations
+    of all the text. The identified areas are marked with bounding boxes,
+    which let us know what parts of the image to focus on.
+    </div>
+
+    <div class="about-wrapper">
+    <h3>2. Optical Character Recognition</h3>
+    <img src="{{ url_for('static', filename='images/ocr.png') }}" class="about-img" height=300>
+    Next we use a state-of-the-art OCR engine to parse the image segment we
+    identified in step 1 into machine-readable text. We also apply a few
+    special tricks to help the model parse vertically-oriented Japanese text
+    and stylized comic fonts.
+    </div>
+
+    <div class="about-wrapper">
+        <h3>3. Translation</h3>
+        <img src="{{ url_for('static', filename='images/translate.png') }}" class="about-img" height=200>
+        All the extracted Japanese text is translated to English. This is a
+        crucial stage in the process, since a quality translation is what
+        allows readers to enjoy the results.
+    </div>
+
+    <div class="about-wrapper">
+    <h3>4. Segmentation</h3>
+        <img src="{{ url_for('static', filename='images/segment.png') }}" class="about-img" height=300>
+        To clear up space for the translated text, we remove the original
+        Japanese text from the speech bubbles. We are now ready to proceed to
+        the final stage.
+    </div>
+
+    <div class="about-wrapper">
+    <h3>5. Text Placement</h3>
+    <img src="{{ url_for('static', filename='images/reconstruction.png') }}" class="about-img" height=250>
+    Finally, we reconstruct the comics using the translated text. The English
+    text is broken up into lines of an appropriate length and resized to
+    comfortably fit their corresponding speech bubble. We don't want text to
+    leak beyond the bounds of the bubble.
+    <br><br>
+    At this point, the comics are translated and ready for reading!
+    </div>
+    </div>
+</div>
+
+</body>
+</html>

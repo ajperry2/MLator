@@ -1,0 +1,484 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+<!--    Resources Loaded from Google Servers    -->
+        <meta charset="UTF-8">
+            {% include 'commonResources.html' %}
+            {{ dropzone.load_css() }}
+            {{ dropzone.style('background:rgb(0,0,0,0.1);border: 2px dashed #000; margin: 10% 10%; min-height: 400px; width: 80%') }}
+                    
+                    
+                <script type="text/javascript"  src="{{ url_for('static', filename='js/jquery.min.1.7.js') }}"></script>
+                <script type="text/javascript"  src="{{ url_for('static', filename='js/turn.html4.min.js') }}"></script>
+                <script  type="text/javascript" src="{{ url_for('static', filename='js/modernizr.2.5.3.min.js')}}"></script>
+                <script type="text/javascript"  src="{{ url_for('static', filename='js/hash.js') }}"></script>
+
+                <title>MLator</title>
+                </head>
+    <body>
+        
+<!--     Navbar for homepage, responds to whether user is logged in   -->
+        <nav id='navbar' class="navbar navbar-expand-md navbar-dark navbar-expand-sm sticky-top">
+            <a class="navbar-brand" id='brand' href="#">
+                <img style='height:40px' src="{{ url_for('static', filename='images/brand.jpg') }}" alt="">
+                    </a>
+                        {% if (current_user.is_authenticated) %}
+                        <div class="navbar-nav ml-auto">
+                            <ul id="main-list" class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class=" font-weight-bold btn nav-link" href='/user/{{current_user.get_user_name()}}'>{{current_user.get_user_name() }}</a>
+                        </li>
+                        {% else %}
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse_marker" aria-controls="collapse_marker" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="collapse_marker">
+                            <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link btn font-weight-bold" data-toggle="modal" data-target="#registerModal">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn font-weight-bold"
+                                id = "newlogin"
+                                data-toggle="modal"
+                                data-target="#logInModal">
+                                Log In
+                            </a>
+                        </li>
+                        {% endif %}
+                </ul>
+            </div>
+            
+        </nav>
+        {% if not (current_user.is_authenticated)  %}
+        
+        <!-- Log In Modal (included if not logged in) -->
+        <div class="modal fade" id="logInModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h1 class="modal-title">Log In</h1>
+                        <button type="button" class="close" style="color:#ff9900;" data-dismiss="modal">×</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        {{ login | safe}}
+
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- Register Modal (included if not logged in) -->
+        <div class="modal fade" id="registerModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h1 class="modal-title">Register</h1>
+                        <button type="button" class="close " style="color:#ff9900;" data-dismiss="modal">×</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        {{ register | safe }}
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+
+ 
+    
+    <div class="position-relative overflow-hidden p-3 p-md-5 vertical-center blue-tint">
+        <div class="opaque"></div>
+        <div class="col-md-8 p-lg-8 mx-auto my-5">
+            <h1 class="title1 ">Manga Translator</h1>
+            <p class="lead font-weight-normal bright-text">Machine Learning Meets Mangas</p>
+
+            <a class="btn btn-outline-warning  orange-btn" href="{{ url_for('about') }}">Learn More</a>
+        </div>
+        <div class="product-device box-shadow d-none d-md-block"></div>
+        <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+    </div>
+
+
+        
+        <div class="container sunrise">
+            
+            <div class="row justify-content-md-center align-items-center " style="height:100%;padding-top:2vh;padding-bottom:2vh">
+                <div class="col-xs-12  ">
+                    
+                    <div class="container">
+                        <div class="card fader" style="width: 100%; display: flex;
+                            align-items: center;">
+                            <div class="card-body">
+                            <h3 class="card-title orange " style="font-size:2rem;">How it Works</h3>
+                                <p class="card-text">Our AI-powered software makes it easy to get the translations you need.</p>
+                                <p class="card-text">When logged in, you can upload a pdf,
+                                image, or folder of images. Wait a few seconds and a download link will
+                                appear. Now you're ready to enjoy your translated comics!</p>
+                                                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+     
+                
+                
+            </div></div>
+        
+        
+    </div>
+    <div class="light-grey">
+        <div class="container">
+
+    <div class="row justify-content-md-center align-items-center " style="height:100%;padding-top:2vh;padding-bottom:2vh">
+            <div class="col-xs-12 order-xs-first order-md-first col-md-6 ">
+                
+                <div class="container">
+                <div class="card fader" style="width: 100%; display: flex;
+                    align-items: center;">
+                    <div class="card-body">
+                        <h3 class="card-title orange " style="font-size:2rem;">Finding Text</h3>
+                        <p class="card-text text-white">Our model first selects where the text is on a page.</p>
+                        <div class=text-spacer ></div>
+                        <p class="card-text  text-white">Robust to the critical failures, our algorithm does not rely on harsh decision boundaries.</p>
+                        <div class=text-spacer ></div>
+
+                        <p class="card-text text-white">These boxes extract the text from the page.</p>
+                    </div>
+                </div>
+                </div>
+                        
+                
+                </div>
+            {% include 'Books1.html' %}
+          
+
+
+    </div></div>
+    <div class="container">
+
+    <div class="row justify-content-md-center align-items-center" style="height:100%;padding-top:2vh;padding-bottom:2vh">
+        {% include 'Books2.html' %}
+
+            <div class="col-xs-12 order-xs-first order-sm-first order-md-last col-md-6 " >
+                <div>
+                    <div class="container">
+                    <div class="card fader" style="width: 100%; display: flex;
+                        align-items: center;">
+                    <div class="card-body ">
+                        <h3 class="card-title orange overflow-hidden"  style="font-size:2rem;">Finding Text</h3>
+                        <p class="card-text text-white">Our model first selects where the text is on a page.</p>
+                        <div class=text-spacer ></div>
+
+                        <p class="card-text text-white">Robust to the critical failure of traditional computer science approaches, as our algorithm does not rely on harsh decision boundaries.</p>
+                    </div>
+                    </div>
+                </div></div>
+            </div>
+          
+    </div></div>
+    <section class="container">
+    <div class="row justify-content-md-center align-items-center" style="height:100%;padding-top:2vh;padding-bottom:2vh">
+<!--   padding     -->
+
+        <div class="col-xs-12 col-md-6 order-xs-first order-md-first" >
+            <div><div class="container">
+                <div class="card fader" style="width: 100%; display: flex;
+                    align-items: center;">
+                    <div class="card-body ">
+                        <h3 class="card-title orange overflow-hidden"  style="font-size:2rem;">Finding Text</h3>
+                        <p class="card-text text-white">Our model first selects where the text is on a page.</p>
+                        <div class=text-spacer ></div>
+                        
+                        <p class="card-text text-white">Robust to the critical failure of traditional computer science approaches, as our algorithm does not rely on harsh decision boundaries.</p>
+                    </div>
+                </div></div>
+            </div>
+        </div>
+        <!--   padding     -->
+        {% include 'Books3.html' %}
+
+    </div>
+    <div class="container">
+
+    <div class="row justify-content-md-center align-items-center" style="height:100%;padding-top:2vh;padding-bottom:2vh">
+        {% include 'Books4.html' %}
+
+        <div class="col-xs-12 order-xs-first order-sm-first order-md-last col-md-6  " >
+            <div><div class="container">
+                <div class="card fader" style="width: 100%; display: flex;
+                    align-items: center;">
+                    <div class="card-body ">
+                        <h3 class="card-title orange overflow-hidden"  style="font-size:2rem;">Finding Text</h3>
+                        <p class="card-text text-white">Our model first selects where the text is on a page.</p>
+                        <div class=text-spacer ></div>
+                        
+                        <p class="card-text text-white">Robust to the critical failure of traditional computer science approaches, as our algorithm does not rely on harsh decision boundaries.</p>
+                    </div>
+                </div>
+            </div></div>
+        </div>
+        
+    </div>
+    </div></section>
+    <section class='light-yellow'>
+        </br>
+        <h2 class="text-center bright-text">Try It Out</h2>
+        <div class="row justify-content-md-center align-items-center " style="height:100%;padding-top:2vh;padding-bottom:2vh">
+            
+
+            <div class=" col-5 ">
+            
+            {{ dropzone.csrf_token }} <!--  render the form's CSRF field like normal. -->
+            
+            {{ dropzone.create(action='upload') }}
+            {{ dropzone.load_js() }}
+            {{ dropzone.config(max_files=1, timeout=10000, default_message='Translate!',upload_action='upload') }}
+                                  
+            </div>
+            <div class=" col ">
+                
+                              <span style="font-size: 10em; color: black;padding-left:50%;">
+                    <i class="fas fa-angle-right"></i>
+                </span>
+                
+            </div>
+            <div class="col-5 ">
+                
+                
+            </div>
+            
+            
+            
+        </div>
+    </section>
+        <script>
+            $(window).resize(function() {
+                             x();
+                             change();
+                             }).bind('orientationchange', function() {
+                                     
+                                     x();
+                                     change();
+                                     });
+             $(document).ready(function() {scroller();
+                               });
+             var change = function(){
+                 x();
+                 for(var i=1; i <5;  i++){resizeViewporti(i);}
+                 
+             };
+        var x = function(){
+            if($( window ).width() < 1000){$('.text-spacer').css('height',0)
+            }else{
+                $('.text-spacer').css('height','20%')}
+        };
+            
+            var build = function(){
+                x();
+                loadApp1();
+                loadApp2();
+                loadApp3();
+                loadApp4();
+
+            };
+            var getHTML = function ( url, callback ) {
+                
+                // Feature detection
+                if ( !window.XMLHttpRequest ) return;
+                
+                // Create new request
+                var form = new XMLHttpRequest();
+                
+                // Setup callback
+                form.onload = function() {
+
+                    if ( callback && typeof( callback ) === 'function' ) {
+                        callback( this.responseXML );
+                    }
+                }
+                
+                // Get the HTML
+                form.open( 'GET', url );
+                form.responseType = 'document';
+                form.send();
+                
+            };
+
+       
+       
+
+        
+        function openForm() {
+            display_block = document.getElementById("myForm").style.display == "block";
+            
+            if(display_block){
+                document.getElementById("myForm").style.display = 'none'
+            }else{
+                document.getElementById("myForm").style.display = 'block'
+            }
+            
+        }
+        $('#login').submit(function (e) {
+                         $.ajax({
+                                type: $(this).attr('method'),
+                                url: $(this).attr('action'), // url to post to, from the forms action
+                                data: $(this).serialize(),
+                                    dataType: 'json',
+                                async: false,
+                                success: function (response) {
+                                if(response['data']['messages']!=false){
+                                
+                                var newHtml = '';
+                                for (i = 0; i < response['data']['messages'].length; i++) {
+                                newHtml += "<div class='alert alert-danger' role='alert'>"+response['data']['messages'][i]+"</div>";
+                                }
+                                $('#loginErrors').html(newHtml);
+                               
+
+                                } else{
+
+                                newHtml = "<div class='alert alert-success' role='alert'>Successfully Logged in</div></li>";
+                                $('#loginErrors').html(newHtml);
+                                window.location.href =  window.location.href.split("home")[0] + 'user/'+$('#userLogin').val();
+                                }
+                                
+                                },
+                                cache: false,
+                                error: function (result) {
+                                alert("Sorry Something has gone wrong.");
+                                }})
+                           e.preventDefault();
+
+                         });
+
+         $('#register').submit(function (e) {
+            $.ajax({
+                   type: $(this).attr('method'),
+                   url: $(this).attr('action'), // url to post to, from the forms action
+                   data: $(this).serialize(),
+                   async: false,
+                       dataType: 'json',
+                   success: function (response) {
+                   if(response['data']['messages']!=false){
+                       var html = '';
+                       for (i = 0; i < response['data']['messages'].length; i++) {
+                       html += "<div class='alert alert-danger' role='alert'>"+response['data']['messages'][i]+"</div>";
+                       }
+                   
+                   $('#registerErrors').html(html);
+                   } else{
+                   html = "<div class='alert alert-success' role='alert'>Successfully Registered</div>";
+                   $('#registerErrors').html(html);
+                   window.location.assign(window.location.href.split("home")[0] + 'user/'+$('#userRegister').val());
+                   }
+                   
+                   },
+                   cache: false,
+                   error: function (result) {
+                   alert("Sorry Something has gone wrong.");
+                   }
+                   
+                   });
+                e.preventDefault();
+
+        });
+        $('#register').submit(function (e) {
+                              $.ajax({
+                                     type: $(this).attr('method'),
+                                     url: $(this).attr('action'), // url to post to, from the forms action
+                                     data: $(this).serialize(),
+                                     async: false,
+                                     dataType: 'json',
+                                     success: function (response) {
+                                     if(response['data']['messages']!=false){
+                                     var html = '';
+                                     for (i = 0; i < response['data']['messages'].length; i++) {
+                                     html += "<div class='alert alert-danger' role='alert'>"+response['data']['messages'][i]+"</div>";
+                                     }
+                                     
+                                     $('#registerErrors').html(html);
+                                     } else{
+                                     html = "<div class='alert alert-success' role='alert'>Successfully Registered</div>";
+                                     $('#registerErrors').html(html);
+                                     window.location.assign(window.location.href.split("home")[0] + 'user/'+$('#userRegister').val());
+                                     }
+                                     
+                                     },
+                                     cache: false,
+                                     error: function (result) {
+                                     alert("Sorry Something has gone wrong.");
+                                     }
+                                     
+                                     });
+                              e.preventDefault();
+                              
+                              });
+                         
+         // Inject our CSRF token into our AJAX request.
+         $.ajaxSetup({
+                     beforeSend: function (xhr, settings) {
+                 if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                 xhr.setRequestHeader("X-CSRFToken", "{{ registerForm.csrf_token._value() }}")
+                     xhr.setRequestHeader("X-CSRFToken", "{{ loginForm.csrf_token._value() }}")
+                 }
+                 }
+                     });
+      
+      window.onscroll = function() {scroller();};
+      
+      function scroller() {
+          if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+              document.getElementById("navbar").style.padding = "0px 0px";
+              var link_list = document.querySelectorAll("#navbar a ");
+              var index = 0, length = link_list.length;
+              for ( ; index < length; index++) {
+                  link_list[index].style.fontSize = "25px";
+              }
+              document.getElementById("brand").style.fontSize = "25px";
+          } else {
+              document.getElementById("navbar").style.padding = "10px 10px";
+              var link_list = document.querySelectorAll("#navbar a ");
+              var index = 0, length = link_list.length;
+              for ( ; index < length; index++) {
+                  link_list[index].style.fontSize = "30px";
+              }
+              document.getElementById("brand").style.fontSize = "50px";
+          }
+          
+          $('.fader').each(function(){
+                             var screenTop = $(this).offset().top;
+                             var windowTop = $(window).scrollTop() + $(window).height();
+
+                             if (screenTop < windowTop+50) {
+                             $(this).addClass("fadein");
+                           $(this).removeClass("fadeout")
+                             }
+                             });
+      }
+        yepnope({
+                test : Modernizr.csstransforms,
+                yep: ["{{ url_for('static', filename='js/turn.js') }}"],
+                nope: ["{{ url_for('static', filename='js/turn.html4.min.js') }}"],
+                both: [ "{{ url_for('static', filename='js/magazine_master.js') }}"],
+                complete: build
+                });
+            </script>
+    </body>
+</html>

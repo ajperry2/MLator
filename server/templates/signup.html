@@ -1,0 +1,24 @@
+{% from "render_field.html" import render_field %}
+
+<!-- Form to Register User-->
+<div class='container'>
+    {% include 'flash.html' %}
+    
+    <form id="register" method="POST" action='checkRegister'> <!-- post : handle submission -->
+        <div id='registerErrors'></div>
+        {{ form.hidden_tag() }}
+        {{ render_field(form.username) }}
+        {{render_field(form.useremail) }}
+        {{ render_field(form.password) }}
+        </br>
+            <dd>{{ form.submit(class_='form-control')|safe }}
+                {% if form.submit.errors %}
+                <ul class=errors>
+                    {% for error in form.submit.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </dd>
+    </form>
+</div> <!-- /container -->

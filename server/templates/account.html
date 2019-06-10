@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139993877-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-139993877-1');
+    </script>
+
+        <meta charset="UTF-8">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+            <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <title>MLator | About</title>
+    <title>Account Info | {{ current_user.username }}</title>
+</head>
+<body>
+
+<!--     Navbar for homepage, responds to whether user is logged in   -->
+        <nav id='navbar' class="navbar navbar-expand-sm navbar-dark sticky-top">
+            <a id='brand' class="navbar-brand brand text-white" href="/">MLator</a>
+            <div class="navbar-nav ml-auto">
+                <ul id="main-list" class="navbar-nav mr-auto">
+                        {% if (current_user.is_authenticated) %}
+                        <li class="nav-item">
+                            <a class=" font-weight-bold nav-link" href='/user/{{current_user.get_user_name()}}'> User Dashboard</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link btn font-weight-bold" data-toggle="modal" data-target="#registerModal">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn font-weight-bold"
+                                id = "newlogin"
+                                data-toggle="modal"
+                                data-target="#logInModal">
+                                Log In
+                            </a>
+                        </li>
+                        {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+
+
+<div class="row margin-top">
+    <div class="col-4 margin-top">
+        <table class="account-info-table">
+            <tr><td><h2>Account Info</h2></td></tr>
+            <tr><td>Name</td><td>{{ current_user.username }}</td></tr>
+            <tr><td>Email</td><td>{{ current_user.email }}</td></tr>
+            <tr><td>Organization</td><td>{{ current_user.username }}</td></tr>
+        </table>
+    </div>
+    <div class="col-4 margin-top">
+        <table class="account-info-table">
+            <tr><td><h2>Previous Uploads</h2></td>
+            {% for project in current_user.projects %}
+            <tr><td>{{ project.date }}</td><td>{{ project.title }}</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4">
+        <table class="account-info-table">
+            <tr><td><h2>Plan Info</h2></td></tr>
+            <tr><td>User Type</td><td>{{ current_user.username }}</td></tr>
+            <tr><td>Plan Type</td><td>{{ current_user.username }}</td></tr>
+            <tr><td>Next Billing Date</td><td>{{ current_user.username }}</td></tr>
+        </table>
+    </div>
+    <div class="col-4">
+        <table class="account-info-table">
+            <tr><td><h2>Billing Info</h2></td></tr>
+            <tr><td>Card Type</td><td>{{ current_user.username }}</td></tr>
+            <tr><td>Card #</td><td>{{ current_user.username }}</td></tr>
+            <tr><td>CID</td><td>{{ current_user.username }}</td></tr>
+            <tr><td>Expiration Date</td><td>{{ current_user.username }}</td></tr>
+        </table>
+    </div>
+</div>
+<div class="row">
+<footer>
+    <ul>
+        <li>Contact Us</li>
+        <li>Partnerships</li>
+        <li>Blog</li>
+    </ul>
+</footer>
+</div>
+</body>
+</html>

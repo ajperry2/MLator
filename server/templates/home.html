@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+    <head>
+         <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139993877-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-139993877-1');
+    </script>
+	    
+	    <!--    Resources Loaded from Google Servers    -->
+        <meta charset="UTF-8">
+
+            {% include 'commonResources.html' %}
+            {{ dropzone.style('background:rgb(0,0,0,0.1);border: 2px dashed #000; margin: 10% 0% 10% 20%; min-height: 400px; width: 80%;padding:0 important!;z-index:0') }}
+                    
+                <script type="text/javascript"  src="{{ url_for('static', filename='css/dropzone.css') }}"></script>
+                    
+                <script type="text/javascript"  src="{{ url_for('static', filename='js/jquery.min.1.7.js') }}"></script>
+                <script type="text/javascript"  src="{{ url_for('static', filename='js/turn.html4.min.js') }}"></script>
+                <script  type="text/javascript" src="{{ url_for('static', filename='js/modernizr.2.5.3.min.js')}}"></script>
+                <script type="text/javascript"  src="{{ url_for('static', filename='js/hash.js') }}"></script>
+
+                <title>MLator</title>
+        <link rel="stylesheet" href="../static/css/style.css">
+    </head>
+    <body>
+        
+<!--     Navbar for homepage, responds to whether user is logged in   -->
+        <nav id='navbar' class="navbar navbar-expand-md navbar-dark navbar-expand-sm sticky-top">
+            <a class="navbar-brand" id='brand' href="#">
+                <img style='height:40px' src="{{ url_for('static', filename='images/brand.jpg') }}" alt="">
+                    </a>
+                        {% if (current_user.is_authenticated) %}
+                        <div class="navbar-nav ml-auto">
+                            <ul id="main-list" class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class=" font-weight-bold btn nav-link" href='/user/{{current_user.get_user_name()}}'>{{current_user.get_user_name() }}</a>
+                        </li>
+                        {% else %}
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse_marker" aria-controls="collapse_marker" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="collapse_marker">
+                            <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link btn font-weight-bold" data-toggle="modal" data-target="#registerModal">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn font-weight-bold"
+                                id = "newlogin"
+                                data-toggle="modal"
+                                data-target="#logInModal">
+                                Log In
+                            </a>
+                        </li>
+                        {% endif %}
+                </ul>
+            </div>
+            
+        </nav>
+        {% if not (current_user.is_authenticated)  %}
+        
+        <!-- Log In Modal (included if not logged in) -->
+        <div class="modal fade" id="logInModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h1 class="modal-title">Log In</h1>
+                        <button type="button" class="close" style="color:#ff9900;" data-dismiss="modal">×</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        {{ login | safe}}
+
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- Register Modal (included if not logged in) -->
+        <div class="modal fade" id="registerModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h1 class="modal-title">Register</h1>
+                        <button type="button" class="close " style="color:#ff9900;" data-dismiss="modal">×</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        {{ register | safe }}
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+
+ 
+    
+    <div class="position-relative overflow-hidden p-3 p-md-5 vertical-center blue-tint">
+        <div class="opaque"></div>
+        <div class="col-md-8 p-lg-8 mx-auto my-5">
+            <h1 class="title1 ">Manga Translator</h1>
+            <p class="lead font-weight-normal bright-text">When AI Meets Mangas...</p>
+
+
+        </div>
+        <div class="product-device box-shadow d-none d-md-block"></div>
+        <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+        
+</div>        
+
+        <div class="row"  style="padding-bottom:0">
+            
+            <center> <h1 style='padding-top:4vh;padding-bottom:2vh' class="text-center ">- PROCESS -</h1></center></div>
+<div class="container">  
+            <div class="row " style="height:100%;padding-top:2vh;padding-bottom:0">
+                <div class="col-xs-12  col-sm-3 ">
+                    
+                    <div class="card fader">
+                        <div class='container'>
+
+                            <center>  <img class="card-img-top" src="{{ url_for('static', filename='images/chat.jpg') }}" style='width:50%' alt=""> </center>
+                            </div>
+
+<div class="card-body sunrise-card" style="padding-bottom:0">
+                       <div class='container'>
+
+                        <div class='container'>
+                               <h2 class="card-text icon_title" style="padding-bottom:0;">Detection</h2>
+
+                            </div>
+                            </div>   
+</div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="col-xs-12  col-sm-3 ">
+   
+   
+                    <div class=" fader">
+                        <div class="card">
+                         <div class="container">
+
+                            <center>  <img class="card-img-top" src="/static/images/eye-scan.jpg" style="width:50%" alt=""> </center>
+                            </div>
+
+                            <div class="card-body"  style="padding-bottom:0">
+                        <div class='container'>
+                             <h2 class="card-text icon_title" style="padding-bottom:0;">OCR</h2>
+
+                            </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="col-xs-12 col-sm-3 ">
+                    
+                    <div class="card fader">
+                        <div class='container'>
+
+
+                            <center>  <img class="card-img-top" src="{{ url_for('static', filename='images/translator.jpg') }}" style='width:50%' alt=""> </center>
+                            </div>
+
+                            <div class="card-body">
+                                
+                                <h2 class="card-text  icon_title" style="padding-bottom:0;">Translation</h2>
+                                
+                            </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="col-xs-12 col-sm-3 ">
+                    
+                    <div class="card fader">
+                        <div class='container'>
+                            <center>  <img class="card-img-top" src="{{ url_for('static', filename='images/review.jpg') }}" style='width:50%' alt=""> </center>
+                            </div>
+
+                        <div  style="padding-bottom:0" class="card-body">
+                            
+                         <h2 class="card-text icon_title" style="padding-bottom:0;">Placement</h2>
+                            
+                        </div>
+                            </div>
+                    
+                    
+                </div>
+</div>                
+                
+        </div>
+        
+        
+    </div>
+    </div>
+    
+
+        
+        
+    </div>
+    <div class="light-grey">
+        
+ 
+        <div class="container sunrise bright-text">
+
+            <div class="row justify-content-md-center align-items-center " style="height:100%;padding-top:4vh;padding-bottom:5vh">
+                <div class="col-xs-12  ">
+
+                    <div class="container">
+                        <div class="card fadein" style="width: 100%; display: flex;
+                            align-items: center;">
+                            <div class="card-body" style="padding-top:0">
+<h1 class=" orange text-center" style="font-size:2.5rem;">- MODELS -</h1>
+                                <p class="card-text text-center" >Our AI-powered software makes it easy to get the translations you need. When logged in, you can upload a pdf,
+                                image, or folder of images. Wait a few seconds and a download link will
+                                appear. Now you're ready to enjoy your translated comics!</p>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+            </div></div>
+        
+        <div class="container">
+
+    <div class="row justify-content-md-center align-items-center " style="height:100%;padding-top:0;padding-bottom:2vh">
+            <div class="col-xs-12 order-xs-first order-md-first col-md-6 ">
+                
+                <div class="container">
+                <div class="card fader" style="width: 100%; display: flex;
+                    align-items: center;">
+                    <div class="card-body">
+                        <h3 class="card-title orange " style="font-size:2.0rem;">Bubble Detection</h3>
+                        <p class="card-text text-white">After you upload a comic, our first task is to detect the locations
+                        of all the text.</p>
+                        <div class=text-spacer ></div>
+                        <p class="card-text  text-white">The identified areas are marked with bounding boxes,
+                        which let us know what parts of the image to focus on.</p>
+
+
+                    </div>
+                </div>
+                </div>
+                        
+                
+                </div>
+            {% include 'Books1.html' %}
+          
+
+
+    </div></div>
+    <div class="container">
+
+    <div class="row justify-content-md-center align-items-center" style="height:100%;padding-top:2vh;padding-bottom:2vh">
+        {% include 'Books2.html' %}
+
+            <div class="col-xs-12 order-xs-first order-sm-first order-md-last col-md-6 " >
+                <div>
+                    <div class="container">
+                    <div class="card fader" style="width: 100%; display: flex;
+                        align-items: center;">
+                    <div class="card-body ">
+                        <h3 class="card-title orange overflow-hidden"  style="font-size:1.0rem;">Optical Character Recognition</h3>
+                        <p class="card-text text-white">Next we use a state-of-the-art OCR engine to parse the image segment we
+                        identified in step 1 into machine-readable text.</p>
+                        <div class=text-spacer ></div>
+
+                        <p class="card-text text-white">We also apply a few
+                        special tricks to help the model parse vertically-oriented Japanese text
+                        and stylized comic fonts.</p>
+                    </div>
+                    </div>
+                </div></div>
+            </div>
+          
+    </div></div>
+    <section class="container">
+    <div class="row justify-content-md-center align-items-center" style="height:100%;padding-top:2vh;padding-bottom:2vh">
+<!--   padding     -->
+
+        <div class="col-xs-12 col-md-6 order-xs-first order-md-first" >
+            <div><div class="container">
+                <div class="card fader" style="width: 100%; display: flex;
+                    align-items: center;">
+                    <div class="card-body ">
+                        <h3 class="card-title orange overflow-hidden"  style="font-size:1.0em;">Translation</h3>
+                        <p class="card-text text-white">All the extracted Japanese text is translated to English.</p>
+                        <div class=text-spacer ></div>
+                        
+                        <p class="card-text text-white">This is a
+                        crucial stage in the process, since a quality translation is what
+                        allows readers to enjoy the results.</p>
+                    </div>
+                </div></div>
+            </div>
+        </div>
+        <!--   padding     -->
+        {% include 'Books3.html' %}
+
+    </div>
+    <div class="container">
+
+
+
+    <div class="row justify-content-md-center align-items-center" style="height:100%;padding-top:2vh;padding-bottom:10vh">
+        {% include 'Books4.html' %}
+
+        <div class="col-xs-12 order-xs-first order-sm-first order-md-last col-md-6  " >
+            <div><div class="container">
+                <div class="card fader" style="width: 100%; display: flex;
+                    align-items: center;">
+                    <div class="card-body ">
+                        <h3 class="card-title orange overflow-hidden"  style="font-size:1.0rem;">Text Placement</h3>
+                        <p class="card-text text-white">Finally, we reconstruct the comics using the translated text. The English
+                        text is broken up into lines of an appropriate length and resized to
+                        comfortably fit their corresponding speech bubble.</p>
+                        <div class=text-spacer ></div>
+                        
+                        <p class="card-text text-white">We don't want text to
+                        leak beyond the bounds of the bubble. At this point, the comics are translated and ready for reading!</p>
+                    </div>
+                </div>
+            </div></div>
+        </div>
+        
+    </div>
+    </div></section>
+    <section class='light-yellow'>
+        </br>
+        <h2 class="text-center bright-text" style="font-size:2.5rem;">- D E M O -</h2>
+        <div class="row justify-content-md-center align-items-center " style="height:100%;padding-top:2vh;padding-bottom:2vh">
+            
+
+            <div class=" col-5 " style='  flex: 1;'>
+            {{ dropzone.csrf_token }} <!--  render the form's CSRF field like normal. -->
+            
+            {{ dropzone.create(action=url_for('upload_demo')) }}
+            {{ dropzone.load_js() }}
+{{ dropzone.config(default_message="UPLOAD YOU IMAGE HERE~",custom_init='this.on("success",function(x,y){$("#output").attr("src",String(y))});',custom_options='addRemoveLinks: true,autoDiscover:true,thumbnailWidth:null,thumbnailHeight:null,thumbnailMethod:"contain",max_files:1,upload_on_click:false')}}
+
+            </div>
+            <div class=" col-1 " style="min-width:0px important!">
+                              <span style="font-size: 10em; color: black;padding-left:45%;">
+                    <i class="fas fa-angle-right"></i>
+                </span>
+                </div>
+            <div class="col-5 " style='  flex: 1;'>
+ <div class="container">
+  <div style=" transform: translate(35%, 225%);position:absolute;z-index:0">HERE IS THE
+RESULT~</div>
+</div>                            <img id='output' style="z-index:0;position:relative;outline:none important!;"></img>
+                 
+            </div>
+            
+            
+            
+        </div>
+    </section>
+        <script>
+            $(window).resize(function() {
+                             x();
+                             change();
+ var y = document.getElementsByClassName("tokem");
+   var i;
+for (i = 0; i < y.length; i++) {
+  y[i].style.width =  y[i].setScaledFont(0.35)
+} 
+                             }).bind('orientationchange', function() {
+                                         document.body.setScaledFont(0.35);
+                                     x();
+                                     change();
+                                     });
+             $(document).ready(function() {scroller();
+                               });
+             var change = function(){
+                 x();
+                 for(var i=1; i <5;  i++){resizeViewporti(i);}
+
+
+
+                 
+             };
+        var x = function(){
+            if($( window ).width() < 1000){$('.text-spacer').css('height',0)
+            }else{
+                $('.text-spacer').css('height','2.5%')}
+        };
+            
+            var build = function(){
+                x();
+                loadApp1();
+                loadApp2();
+                loadApp3();
+                loadApp4();
+
+            };
+            var getHTML = function ( url, callback ) {
+                
+                // Feature detection
+                if ( !window.XMLHttpRequest ) return;
+                
+                // Create new request
+                var form = new XMLHttpRequest();
+                
+                // Setup callback
+                form.onload = function() {
+
+                    if ( callback && typeof( callback ) === 'function' ) {
+                        callback( this.responseXML );
+                    }
+                }
+                
+                // Get the HTML
+                form.open( 'GET', url );
+                form.responseType = 'document';
+                form.send();
+                
+            };
+
+        var spin = function(){$("#icon").html('<div id="icon" class="spinner-border text-secondary" role="status"><span class="sr-only">Loading...</span></div>');}
+        var notspin = function(){$("#icon").html('<span style="font-size: 10em; color: black;padding-left:50%;"><i class="fas fa-angle-right"></i></span>');};
+function openForm() {
+            display_block = document.getElementById("myForm").style.display == "block";
+            
+            if(display_block){
+                document.getElementById("myForm").style.display = 'none'
+            }else{
+                document.getElementById("myForm").style.display = 'block'
+            }
+            
+        }
+        $('#login').submit(function (e) {
+                         $.ajax({
+                                type: $(this).attr('method'),
+                                url: $(this).attr('action'), // url to post to, from the forms action
+                                data: $(this).serialize(),
+                                    dataType: 'json',
+                                async: false,
+                                success: function (response) {
+                                if(response['data']['messages']!=false){
+                                
+                                var newHtml = '';
+                                for (i = 0; i < response['data']['messages'].length; i++) {
+                                newHtml += "<div class='alert alert-danger' role='alert'>"+response['data']['messages'][i]+"</div>";
+                                }
+                                $('#loginErrors').html(newHtml);
+                               
+
+                                } else{
+
+                                newHtml = "<div class='alert alert-success' role='alert'>Successfully Logged in</div></li>";
+                                $('#loginErrors').html(newHtml);
+                                window.location.href =  window.location.href.split("home")[0] + 'user/'+$('#userLogin').val();
+                                }
+                                
+                                },
+                                cache: false,
+                                error: function (result) {
+                                alert("Sorry Something has gone wrong.");
+                                }})
+                           e.preventDefault();
+
+                         });
+
+
+
+
+         $('#register').submit(function (e) {
+            $.ajax({
+                   type: $(this).attr('method'),
+                   url: $(this).attr('action'), // url to post to, from the forms action
+                   data: $(this).serialize(),
+                   async: false,
+                       dataType: 'json',
+                   success: function (response) {
+                   if(response['data']['messages']!=false){
+                       var html = '';
+                       for (i = 0; i < response['data']['messages'].length; i++) {
+                       html += "<div class='alert alert-danger' role='alert'>"+response['data']['messages'][i]+"</div>";
+                       }
+                   
+                   $('#registerErrors').html(html);
+                   } else{
+                   html = "<div class='alert alert-success' role='alert'>Successfully Registered</div>";
+                   $('#registerErrors').html(html);
+                   window.location.assign(window.location.href.split("home")[0] + 'user/'+$('#userRegister').val());
+                   }
+                   
+                   },
+                   cache: false,
+                   error: function (result) {
+                   alert("Sorry Something has gone wrong.");
+                   }
+                   
+                   });
+                e.preventDefault();
+
+        });
+        $('#register').submit(function (e) {
+                              $.ajax({
+                                     type: $(this).attr('method'),
+                                     url: $(this).attr('action'), // url to post to, from the forms action
+                                     data: $(this).serialize(),
+                                     async: false,
+                                     dataType: 'json',
+                                     success: function (response) {
+                                     if(response['data']['messages']!=false){
+                                     var html = '';
+                                     for (i = 0; i < response['data']['messages'].length; i++) {
+                                     html += "<div class='alert alert-danger' role='alert'>"+response['data']['messages'][i]+"</div>";
+                                     }
+                                     
+                                     $('#registerErrors').html(html);
+                                     } else{
+                                     html = "<div class='alert alert-success' role='alert'>Successfully Registered</div>";
+                                     $('#registerErrors').html(html);
+                                     window.location.assign(window.location.href.split("home")[0] + 'user/'+$('#userRegister').val());
+                                     }
+                                     
+                                     },
+                                     cache: false,
+                                     error: function (result) {
+                                     alert("Sorry Something has gone wrong.");
+                                     }
+                                     
+                                     });
+                              e.preventDefault();
+                              
+                              });
+                             var csrf_token = "{{ csrf_token() }}";
+         // Inject our CSRF token into our AJAX request.
+         $.ajaxSetup({
+                     beforeSend: function (xhr, settings) {
+                 if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                 xhr.setRequestHeader("X-CSRFToken", "{{ registerForm.csrf_token._value() }}")
+                     xhr.setRequestHeader("X-CSRFToken", "{{ loginForm.csrf_token._value() }}")
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                 }
+                 }
+                     });
+      
+      window.onscroll = function() {scroller();};
+      
+      function scroller() {
+          if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+              document.getElementById("navbar").style.padding = "0px 0px";
+              var link_list = document.querySelectorAll("#navbar a ");
+              var index = 0, length = link_list.length;
+              for ( ; index < length; index++) {
+                  link_list[index].style.fontSize = "25px";
+              }
+              document.getElementById("brand").style.fontSize = "25px";
+          } else {
+              document.getElementById("navbar").style.padding = "10px 10px";
+              var link_list = document.querySelectorAll("#navbar a ");
+              var index = 0, length = link_list.length;
+              for ( ; index < length; index++) {
+                  link_list[index].style.fontSize = "30px";
+              }
+              document.getElementById("brand").style.fontSize = "50px";
+          }
+document.body.setScaledFont = function(f) {
+  var s = this.offsetWidth, fs = s * f;
+alert(fs);
+  this.style.fontSize = fs + '%';
+  return this
+};          
+          $('.fader').each(function(){
+                             var screenTop = $(this).offset().top;
+                             var windowTop = $(window).scrollTop() + $(window).height();
+
+                             if (screenTop < windowTop+50) {
+                           $(this).removeClass("fader")
+                             $(this).addClass("fadein");
+                           $(this).removeClass("fadeout")
+                             }
+                             });
+      }
+        yepnope({
+                test : Modernizr.csstransforms,
+                yep: ["{{ url_for('static', filename='js/turn.js') }}"],
+                nope: ["{{ url_for('static', filename='js/turn.html4.min.js') }}"],
+                both: [ "{{ url_for('static', filename='js/magazine_master.js') }}"],
+                complete: build
+                });
+            </script>
+        <style>
+.dropzone{
+padding:0 important!
+}
+.dropzone .dz-preview:hover .dz-image img {
+border-radius: 20px;
+  -webkit-transform: scale(1.0, 1.0);
+  -moz-transform: scale(1.0, 1.0);
+  -ms-transform: scale(1.0, 1.0);
+  -o-transform: scale(1.0, 1.0);
+  transform: scale(1.0, 1.0);
+  -webkit-filter: blur(0px);
+  filter: blur(0px); }
+
+            .dz-image img{
+                width:100%;
+                height:100%;
+            }
+        .dz-preview {
+            width:100%;
+margin:0 !important;
+        }
+        .dropzone .dz-preview .dz-image{
+z-index: 0;
+
+position: relative;
+            width:auto;
+            height:auto;
+border-radius:0 important!;
+z-index:0 important!;
+
+        }
+        #output{
+                background: #0000002a;
+                border: 2px dashed #000;
+                margin: 10% 10%;
+                height:100%;
+min-height: 400px;
+                width: 80%;
+        }
+.dz-progress{
+opacity:0!important
+}
+.dz-message{
+	position: absolute;
+	padding: 20px;
+z-index:0;
+}
+.dz-filename,.dz-success-mark,.dz-error-mark,.dz-size{
+visibility:hidden;
+height:0;
+}
+.icon_title{
+  text-align: center;
+  font-size: 25.5vw;
+}        </style>
+    </body>
+</html>
+

@@ -1,0 +1,6 @@
+Overview of the project
+=======================
+
+Fans of comic books often have difficulty finding translations of comics in their language. We are developing a product which utilizes machine learning and deep learning to automate the translation process. Current products in the market use rule-based engines to generate text, but the output is irregular and leads to poor translations. For our project, the finished product will be a web application providing a paid service to publishers, allowing their work reach a wider international audience. Comic fans can then read the books which don’t have translations in their language. These users will be able to go to our website, login in and upload a single image or a folder. After this, the website will give the user the option to download the translated comic images. Moreover, there is potential to make a consumer-facing mobile application as well. This application would be a cheaper single-language version of our web application, at least initially.
+
+From our experience with the community, many fans have hard drives filled with comics that they want to read, but can’t due to language differences. This leads us to believe that a market exists for the product.
