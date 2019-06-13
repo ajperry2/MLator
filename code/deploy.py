@@ -8,9 +8,6 @@ warnings.filterwarnings("ignore")
 
 git_repo_owner = "MSDS698"
 git_repo_name = "product-analytics-group7"
-# git_user_id = "dianewoodbridge"
-
-# ## Assumption : Anaconda, Git (configured)
 
 
 def ssh_client():
