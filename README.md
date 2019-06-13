@@ -41,7 +41,7 @@ We practiced safe input detection. Not checking for bad input, but making sure a
 ![Logo](image/logo.png "Demonstration")
 The goal of front end was to aid users in deciding if they want to use our product. This was done through a walk through of all of the steps in our model.
 
-After the user has read about how our model and decided they want to try it, there is a demo at the bottom of the home page which lets you drag and drop an image onto a square and in a few seconds a translated version is displayed on the right.
+After the user has read about how our model works and has decided they want to try it, there is a demo at the bottom of the home page which lets you drag and drop an image onto a square and in a few seconds a translated version is displayed on the right.
 
 Should the user want, there is a log in system which lets a user make batch requests. Here they can drag and drop multiple images at once. There is feedback on how far in the process the translation is. Once all of the images are translated, a download button will start a download of all the user's translated text.
 
