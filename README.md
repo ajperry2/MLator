@@ -1,4 +1,4 @@
-# ![MLator](mlator.com "Demonstration") ![MLator Splash Screen](image/splash.png "Logo Title Text 1")
+# [MLator](http://www.mlator.com) ![MLator Splash Screen](image/splash.png "Logo Title Text 1")
  By Zack Pan, Yuhan Wang, Wei Wei, Tianqi Wang, Minchen Wang, Harrison Mamin, and Alan Perry
  
 ### MLator is a project we worked together on to supply the Manga industry with an alternative to slow, low quality automated translation and expensive human translation.
